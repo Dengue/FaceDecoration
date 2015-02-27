@@ -1,4 +1,4 @@
-var startCapture = function(video,videoStream){
+var startVideo = function(video,videoStream){
 
 
 	var onSuccess = function (stream){
@@ -18,15 +18,21 @@ var startCapture = function(video,videoStream){
     	navigator.getUserMedia({video:true},onSuccess,onError);
     }
 };
+
+var translateVideoToCanvas = function(video,canvas,videoStream){
+	var intId = setInterval(function(){ 
+		capture(video,canvas,videoStream)
+	},60);
+
+	return intId;
+}
 var capture = function(video,canvas,videoStream){
 	if(!videoStream.url){
 		return;
 	}
-	showSaveBtn();
 	var context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, video.width, video.height);
-    var base64dataUrl = canvas.toDataURL('image/png');
-    setDataUrlToA(base64dataUrl);
+    
 }
 var setDataUrlToA = function(base64dataUrl){
 	var a = document.querySelector('#save a');
@@ -55,14 +61,20 @@ function main(){
 	var screenShot = document.getElementById('screenShot');
 	var clear = document.getElementById('clear');
 	var save = document.getElementById('save');
-	play.addEventListener('click',function(){
-		startCapture(video,videoStream);
-	});
+	
+	startVideo(video,videoStream);
+	var intId = translateVideoToCanvas(video,canvas,videoStream);
 	screenShot.addEventListener('click',function(){
-		capture(video,canvas,videoStream);
+		showSaveBtn();
+		var base64dataUrl = canvas.toDataURL('image/png');
+    	setDataUrlToA(base64dataUrl);
+		clearInterval(intId);
 	});
 	clear.addEventListener('click',function(e){
-		clearCanvas(canvas);
+		if(!save.classList.contains('hide')){
+			save.classList.add('hide');
+		}
+		intId = translateVideoToCanvas(video,canvas,videoStream);
 	});
 }
 main();
