@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="author" content="Aurelio De Rosa">
+      <title>getUserMedia Demo by Aurelio De Rosa</title>
+      <link rel="stylesheet" href="style.css">
+   </head>
+   <body>
+   	<div class="wrapper">
+   	  <div class = "items">
+   	  	<div class = "item">
+   	  		<div>Video</div>
+      		<video id="video" width="320" height="240" autoplay="autoplay" controls="controls"></video>
+      		<div class = "buttonWrap">
+      			<button id="play">Play</button>
+      			<button id = "screenShot">Make screen shot</button>
+      		</div>
+      	</div>
+      	<div class = "item">
+      		<div>Canvas</div>
+			<canvas id="canvas" width="320" height="240" ></canvas>
+			<div class = "buttonWrap">
+      			<button id="save" class ="hide"><a>Save</a></button>
+      			<button id="clear">Clear</button>
+      		</div>
+	  	</div>
+	  </div>
+    </div>
+      <script src = "video.js">
+      </script>
+   </body>
+</html>
+   

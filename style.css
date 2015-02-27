@@ -1,0 +1,35 @@
+*{
+	margin:0;
+	padding: 0;
+}
+.items{
+	width:800px;
+	margin:100px auto;
+}
+.item{
+	margin-left: 30px;
+	display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    text-align: left;
+    background-color: #E6E6E6;
+}
+.item > video,
+.item > canvas{
+	display: block;
+}
+.item > div{
+	text-align: center;
+	padding: 10px 0px;
+}
+.buttonWrap{
+	margin:  0px auto;
+	background-color: white;
+}
+.hide{
+	display: none;
+}
+#save a{
+	text-decoration: none;
+	color:black;
+}
