@@ -5,6 +5,7 @@ var startVideo = function(video,videoStream){
 		var srcstream = window.URL ? window.URL.createObjectURL : function(stream) { return stream};
 		videoStream.url = srcstream(stream);
 		video.src = videoStream.url;
+		whenVideoStreamReady(video,videoStream)
 	}
 
 
@@ -19,11 +20,10 @@ var startVideo = function(video,videoStream){
     }
 };
 
-var translateVideoToCanvas = function(video,canvas,videoStream){
+var translateVideoToCanvas = function(video,videoStream,canvas){
 	var intId = setInterval(function(){ 
 		capture(video,canvas,videoStream)
 	},60);
-
 	return intId;
 }
 var capture = function(video,canvas,videoStream){
@@ -52,18 +52,12 @@ var clearCanvas = function(canvas){
 		save.classList.add('hide');
 	}
 }
-function main(){
-	var videoStream = {};
-	videoStream.url = false;
-	var video = document.getElementById('video');
+var whenVideoStreamReady = function(video,videoStream){
 	var canvas = document.getElementById('canvas');
-	var play = document.getElementById('play');
 	var screenShot = document.getElementById('screenShot');
 	var clear = document.getElementById('clear');
 	var save = document.getElementById('save');
-	
-	startVideo(video,videoStream);
-	var intId = translateVideoToCanvas(video,canvas,videoStream);
+	var intId = translateVideoToCanvas(video,videoStream,canvas)
 	screenShot.addEventListener('click',function(){
 		showSaveBtn();
 		var base64dataUrl = canvas.toDataURL('image/png');
@@ -74,7 +68,14 @@ function main(){
 		if(!save.classList.contains('hide')){
 			save.classList.add('hide');
 		}
-		intId = translateVideoToCanvas(video,canvas,videoStream);
+		intId = translateVideoToCanvas(video,videoStream,canvas);
 	});
+}
+function main(){
+	var videoStream = {};
+	videoStream.url = false;
+	var video = document.getElementById('video');	
+	startVideo(video,videoStream);
+
 }
 main();
