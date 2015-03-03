@@ -55,10 +55,3 @@ DragNdropController.prototype.dragEnd = function(event){
 		this.element.removeAttribute("data-draggable");
 		this.element.removeEventListener('mousemove',this.dragMove1);
 };
-
-
-
-var childs = document.getElementsByClassName('child');
-var ctrl1 = new DragNdropController(childs[0]);
-
-var ctrl2 = new DragNdropController(childs[1]);

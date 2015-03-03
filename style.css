@@ -1,40 +1,122 @@
-*{
+html,body{
 	margin:0;
 	padding: 0;
+	height: 100%;
 }
-.items{
-	width:800px;
-	margin:100px auto;
+
+video, canvas {
+	position: absolute;
+	top: 0; bottom: 0;
+	left: 0; right: 0;
 }
-.item{
-	position: relative;
-	margin-left:-90px;
-	top:50%;
-	left:50%;
-	display: inline-block;
-    white-space: normal;
-    vertical-align: top;
-    text-align: left;
-    background-color: #E6E6E6;
+video {
+	z-index: 10;
 }
-.item > video{
+canvas {
+	z-index: 20;
+}
+
+.toolsPanel, .buttonWrap {
+	position: absolute;
+
+}
+
+video{
 	display: none;
 }
-.item > canvas{
+canvas{
 	display: block;
 }
-.item > div{
-	text-align: center;
-	padding: 10px 0px;
-}
 .buttonWrap{
-	margin:  0px auto;
-	background-color: white;
+	margin: 0px auto;
+	/* background-color: white; */
+	top: 10%;
+	right: 10%;
+	z-index: 30;
+	text-align: center;
+}
+#save{
+	text-decoration: none;
+	color:black;
+	
+}
+#save > img,#clear > img{
+	width:auto;
+	height: auto;
+	max-width: 50px;
+	max-height: 50px;
 }
 .hide{
 	display: none;
 }
-#save a{
-	text-decoration: none;
-	color:black;
+.picture{
+	z-index:1;
+	position: absolute;
+}
+
+input[type=checkbox]{
+	display: none;
+}
+
+.screenShot{
+	background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+DQogPHBhdGggc3R5bGU9InN0cm9rZS13aWR0aDowO3N0cm9rZS1taXRlcmxpbWl0OjQ7ZmlsbDojNzc5MTlkOyIgZD0ibTMuMzQ2MDksMTMuOTczNyw0MS4yMDYxLDBjMC4yMTk5MDEsMCwwLjM5NjkzMywwLjE3NzAzMywwLjM5NjkzMywwLjM5NjkzM3YyMi4xMDYxYzAsMC4yMTk5MDEtMC4xNzcwMzIsMC4zOTY5MzQtMC4zOTY5MzMsMC4zOTY5MzRoLTQxLjIwNjFjLTAuMjE5OTAxLDAtMC4zOTY5MzMtMC4xNzcwMzMtMC4zOTY5MzMtMC4zOTY5MzR2LTIyLjEwNjFjMC0wLjIxOTksMC4xNzcwMzItMC4zOTY5MzMsMC4zOTY5MzMtMC4zOTY5MzN6Ii8+DQogPHBhdGggc3R5bGU9ImZpbGw6IzcxYzhlOTsiIGQ9Im00My44NTM0LDE1Ljc0NjZjMCwwLjU1Mi0wLjQ0OCwxLTEsMXMtMS0wLjQ0OC0xLTEsMC40NDgtMSwxLTEsMSwwLjQ0OCwxLDF6Ii8+DQogPHBhdGggc3R5bGU9ImZpbGw6IzcxYzhlOTsiIGQ9Im00LjU1MzM5LDEyLjk0NjYsNy4xMiwwLDAsMS4wNi03LjEyLDB6Ii8+DQogPHBhdGggc3R5bGU9InN0cm9rZTojNzc5MTlkO2ZpbGw6bm9uZTsiIGQ9Im0zNi4yNTM0LDIzLjg0NjZjMCw2Ljg4LTUuNTcsMTIuNC0xMi40LDEyLjQtNi44OCwwLTEyLjQtNS41Ny0xMi40LTEyLjQsMC02Ljg4LDUuNTctMTIuNCwxMi40LTEyLjQsNi44OCwwLDEyLjQsNS41NywxMi40LDEyLjR6Ii8+DQogPHBhdGggc3R5bGU9InN0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDowLjc1MzAwMDAyO3N0cm9rZS1taXRlcmxpbWl0OjQ7ZmlsbDojNGI2NTcxOyIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiIGQ9Im0zNS40NDM0LDIzLjU0NjZjMCw2LjQzNjA2LTUuMjE5MzYsMTEuNjQ1NC0xMS42NDA2LDExLjY0NTQtNi40Mzc3NiwwLTExLjY0MDYtNS4yMDkzNC0xMS42NDA2LTExLjY0NTRzNS4yMTkzNi0xMS42NDU0LDExLjY0MDYtMTEuNjQ1NGM2LjQzNzc2LDAsMTEuNjQwNiw1LjIwOTM0LDExLjY0MDYsMTEuNjQ1NHoiLz4NCiA8cGF0aCBzdHlsZT0iZmlsbDojNzFjOGU5OyIgZD0ibTI4Ljc1MzQsMjMuNTQ2NmMwLDIuNzYtMi4yNCw1LTUsNXMtNS0yLjI0LTUtNSwyLjI0LTUsNS01LDUsMi4yNCw1LDV6Ii8+DQogPHBhdGggc3R5bGU9ImZpbGw6IzcxYzhlOTsiIGQ9Im00My44NTM0LDE1Ljc0NjZjMCwwLjU1Mi0wLjQ0OCwxLTEsMXMtMS0wLjQ0OC0xLTEsMC40NDgtMSwxLTEsMSwwLjQ0OCwxLDF6Ii8+DQogPHBhdGggc3R5bGU9ImZpbGw6IzcxYzhlOTsiIGQ9Im00LjU1MzM5LDEyLjk0NjYsNy4xMiwwLDAsMS4wNi03LjEyLDB6Ii8+DQogPHBhdGggc3R5bGU9InN0cm9rZS13aWR0aDowO3N0cm9rZS1taXRlcmxpbWl0OjQ7ZmlsbDpub25lOyIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiIGQ9Im0zNi4xNTM0LDIzLjI0NjZjMCw2Ljg4LTUuNTcsMTIuNC0xMi40LDEyLjQtNi44OCwwLTEyLjQtNS41Ny0xMi40LTEyLjQsMC02Ljg4LDUuNTctMTIuNCwxMi40LTEyLjQsNi44OCwwLDEyLjQsNS41NywxMi40LDEyLjR6Ii8+DQogPHBhdGggc3R5bGU9InN0cm9rZTojZmZmZmZmO3N0cm9rZS13aWR0aDowLjc1MzAwMDAyO3N0cm9rZS1taXRlcmxpbWl0OjQ7ZmlsbDojNGI2NTcxOyIgc3Ryb2tlLW1pdGVybGltaXQ9IjQiIGQ9Im0zNS40NDM0LDIzLjU0NjZjMCw2LjQzNjA2LTUuMjE5MzYsMTEuNjQ1NC0xMS42NDA2LDExLjY0NTQtNi40Mzc3NiwwLTExLjY0MDYtNS4yMDkzNC0xMS42NDA2LTExLjY0NTRzNS4yMTkzNi0xMS42NDU0LDExLjY0MDYtMTEuNjQ1NGM2LjQzNzc2LDAsMTEuNjQwNiw1LjIwOTM0LDExLjY0MDYsMTEuNjQ1NHoiLz4NCiA8cGF0aCBzdHlsZT0iZmlsbDojNzFjOGU5OyIgZD0ibTI4Ljc1MzQsMjMuNTQ2NmMwLDIuNzYtMi4yNCw1LTUsNXMtNS0yLjI0LTUtNSwyLjI0LTUsNS01LDUsMi4yNCw1LDV6Ii8+DQo8L3N2Zz4=');
+	background-repeat: no-repeat;
+	background-position: 50%;
+	background-size: 75px;
+	height: 50px;
+	width: 100px;
+	position:absolute;
+	left:50%;
+	margin-left: -50px;
+	opacity: 0.7;
+	bottom: 5%;
+	z-index: 30;
+}
+
+.buttonWrap .clear, .buttonWrap .save, .screenShot.captured {
+	display: none;
+}
+
+.buttonWrap.captured .clear, .buttonWrap.captured .save {
+	display: inherit;
+}
+.toolsPanel{
+	top:15%;
+	left:15%;
+	position: absolute;
+	height: 100%;
+	z-index:40;
+}
+input[id=picture1] + label{
+	margin-bottom: 40px;
+}
+input[id=picture1]:checked + label + .picture{
+	display: inherit;
+}
+input + label{
+	display: block;
+	background-color:#A0B2BA;
+	opacity: 0.5;
+	min-width:80px;
+	min-height: 80px;
+	border:5px solid #BCB2BA;
+	border-radius: 20px;
+	position: relative;
+}
+input + label > img{
+	width:auto;
+	height: auto;
+	max-width: 50px;
+	max-height: 50px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	margin-left: -25px;
+	margin-top:-25px;
+}
+input[id=picture2] + label{
+	margin-bottom: 40px;
+}
+input[id=picture2]:checked + label + .picture{
+	display: inherit;
 }

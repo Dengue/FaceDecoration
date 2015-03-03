@@ -8,24 +8,37 @@
       <link rel="stylesheet" href="style.css">
    </head>
    <body>
-   	<div class="wrapper">
-   	  <div class = "items">
-   	  	<div class = "item">
-      		<video id="video" width="320" height="240" autoplay="autoplay" controls="controls"></video>
-      	</div>
-      	<div class = "item">
-      		<div>Canvas</div>
-			<canvas id="canvas" width="320" height="240" ></canvas>
-			<div class = "buttonWrap">
-               <button id = "screenShot">Make screen shot</button>
-      			<button id="save" class ="hide"><a>Save</a></button>
-      			<button id="clear">Clear</button>
-      		</div>
-	  	</div>
-	  </div>
-    </div>
-      <script src = "video.js">
-      </script>
+		<video id="video" autoplay="autoplay" controls="controls"></video>
+	   <canvas id="canvas" ></canvas>
+      <div id = "screenShot" class = "screenShot"></div>
+	   <div class = "buttonWrap">
+         <div id="clear" class="clear"><img src="./pictures/play.png"></div>
+			<a id="save" class ="save hide"><img src="./pictures/download2.png"></a>
+			
+		</div>
+      <div class =  "toolsPanel hide">
+         <input type='checkbox' name='picture1' value='valuable' id="picture1"/>
+         <label for="picture1">
+            <img src="./pictures/glasses.png">
+         </label>
+         <div class="picture glasses hide">
+            <img src="./pictures/glasses.png">
+         </div>
+
+         <input type='checkbox' name='picture2' value='valuable' id="picture2"/>
+         <label for="picture2">
+             <img src="./pictures/moustache.png">
+         </label>
+         <div class="picture moustache hide">
+            <img src="./pictures/moustache.png">
+         </div>
+      </div>
+     
+      <script src = "utils.js"></script>
+      <script src = "tocenter.js"></script>
+      <script src = "drag.js"></script>
+      <script src = "video.js"></script>
+      <script src = "main.js"></script>
    </body>
 </html>
    
